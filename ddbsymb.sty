@@ -1,0 +1,303 @@
+\ProvidesPackage{ddbsymb}
+
+\RequirePackage{mathtools} % \DeclarePairedDelimiter (uses amsmath)
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{ifthen}
+\RequirePackage{etex}      % \middle
+\RequirePackage{stmaryrd}  % \llbracket
+\RequirePackage{xspace}    % \xspace
+
+%-----------%
+% Operators %
+%-----------%
+\DeclareMathOperator*{\argmax}{arg \, max}
+\DeclareMathOperator*{\argmin}{arg \, min}
+
+%------------%
+% Delimiters %
+%------------%
+\DeclarePairedDelimiter\singlebars{\lvert}{\rvert}
+\DeclarePairedDelimiter\doublebars{\lVert}{\rVert}
+\DeclarePairedDelimiter\parentheses{\lparen}{\rparen}
+\DeclarePairedDelimiter\braces{\lbrace}{\rbrace}
+\DeclarePairedDelimiter\brackets{\lbrack}{\rbrack}
+\DeclarePairedDelimiter\invertbrackets{\rbrack}{\lbrack}
+\DeclarePairedDelimiter\bbrackets{\llbracket}{\rbracket}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceiling{\lceiling}{\rceiling}
+
+\newcommand{\of}{\parentheses}
+\newcommand{\element}{\brackets}
+\newcommand{\ofproba}{\brackets}
+
+\newcommand{\middlebar}{\, \middle\vert \,}
+
+%---------%
+% Numbers %
+%---------%
+\DeclarePairedDelimiter\brathesesdel{\lbrack}{\rparen}
+\DeclarePairedDelimiter\parencketsdel{\lparen}{\rbrack}
+\DeclarePairedDelimiter\lbracketsdel{\lbrack}{\lbrack}
+\DeclarePairedDelimiter\rbracketsdel{\rbrack}{\rbrack}
+
+\newcommand{\intervalus}[3][cc]{
+  \ifthenelse{\equal{#1}{cc}}{\brackets{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oo}}{\parentheses{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{co}}{\brathesesdel*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oc}}{\parencketsdel*{#2 , #3}}{}
+}
+\newcommand{\intervalfr}[3][cc]{
+  \ifthenelse{\equal{#1}{cc}}{\brackets{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oo}}{\invertbrackets{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{co}}{\lbracketsdel*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oc}}{\rbracketsdel*{#2 , #3}}{}
+}
+\newcommand{\rangeus}[2]{\braces{#1 \, .. \, #2}}
+\newcommand{\rangefr}[2]{\bbrackets{#1 , #2}}
+\newcommand{\abs}{\singlebars}
+\newcommand{\pospart}[1]{\brackets{#1}^+}
+\newcommand{\negpart}[1]{\brackets{#1}^-}
+\newcommand{\onem}[1]{\parentheses{1 - #1}}
+
+\newcommand{\imagsym}{\mathrm{\mathbf{i}}}
+\newcommand{\expsym}{\mathrm{e}}
+
+%----------%
+% Mappings %
+%----------%
+\newcommand{\noarg}{\cdot}
+\newcommand{\compo}{\,\mathord{\circ}\,}
+
+%------%
+% Sets %
+%------%
+\newcommand{\set}{\braces*}
+\newcommand{\suchthat}{\middlebar}
+
+\newcommand{\complemC}[1]{\complement#1}
+\newcommand{\complemc}[1]{#1^{c}}
+\newcommand{\complembar}[1]{\overline{#1}}
+
+\newcommand{\union}{\cup}
+\newcommand{\inter}{\cap}
+\newcommand{\xor}{\oplus}
+\newcommand{\directsum}{\oplus}
+\newcommand{\Union}{\bigcup}
+\newcommand{\Inter}{\bigcap}
+\newcommand{\Directsum}{\bigoplus}
+
+%----------%
+% Topology %
+%----------%
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\interior}[1]{\overset{\circ}{#1}}
+\newcommand{\limfty}[1]{\lim_{#1 \to \infty}}
+\newcommand{\incto}{\nearrow}
+\newcommand{\decto}{\searrow}
+\newcommand{\tto}{\rightrightarrows}
+
+%---------------%
+% Vector spaces %
+%---------------%
+\newcommand{\tuple}{\parentheses}
+\newcommand{\norm}[2][]{\doublebars{#2}_{#1}}
+\newcommand{\transposesym}{\mathrm{T}}
+\newcommand{\tr}[1]{{#1}^{\transposesym}}
+
+%-----------%
+% Sequences %
+%-----------%
+\newcommand{\idxin}[2]{_{#1 \in #2}}
+\newcommand{\idxfromto}[3]{_{#1 = #2}^{#3}}
+
+\newcommand{\seqelem}[3]{{#1}#2{#3}}
+\newcommand{\seqin}[4]{\set{\seqelem{#1}{#2}{#3}}\idxover{#3}{#4}}
+\newcommand{\seqfromto}[5]{\set{\seqelem{#1}{#2}{#3}}\idxfromto{#3}{#4}{#5}}
+% comma separated
+\newcommand{\seqcom}[4]{\seqelem{#1}{#2}{#3}, \dotsc, #1#2{#4}}
+% juxtaposed
+\newcommand{\seqjuxt}[4]{\seqelem{#1}{#2}{#3} \dotsm #1#2{#4}}
+% the doubling of one of the letters indicates that two elements are used to start or finish the sequence
+\newcommand{\sseqcom}[5]{\seqelem{#1}{#2}{#3}, \seqcom{#1}{#2}{#4}{#5}}
+\newcommand{\sseqjuxt}[5]{\seqelem{#1}{#2}{#3} \seqjuxt{#1}{#2}{#4}{#5}}
+\newcommand{\seqqcom}[5]{\seqcom{#1}{#2}{#3}{#4}, \seqelem{#1}{#2}{#5}}
+\newcommand{\seqqjuxt}[5]{\seqcom{#1}{#2}{#3}{#4} \seqelem{#1}{#2}{#5}}
+
+\newcommand{\intseq}[2]{#1, \dotsc, #2}
+
+%---------------%
+% Probabilities %
+%---------------%
+\newcommand{\probasym}{\mathbb{P}}
+\newcommand{\expectsym}{\mathbb{E}}
+\newcommand{\varsym}{\mathbb{V}\textrm{ar}}
+
+% the starred version of \ofproba is used to allow for a conditional which is implemented through \middle
+\newcommand{\underdist}{_}
+\newcommand{\ofp}{\!\ofproba*}
+\newcommand{\probaof}[2][]{\probasym \underdist{#1} \ofp{#2}}
+\newcommand{\expectof}[2][]{\expectsym \underdist{#1} \ofp{#2}}
+\newcommand{\varof}[2][]{\varsym \underdist{#1} \ofp{#2}}
+
+\newcommand{\distribsym}{\Delta}
+\newcommand{\distribover}[1]{\distribsym\of{#1}}
+
+\newcommand{\cond}{\middlebar}
+
+\newcommand{\drawn}{\sim}
+
+%---------------%
+% Markov chains %
+%---------------%
+\newcommand{\access}{\rightarrow}
+\newcommand{\communicate}{\leftrightarrow}
+\newcommand{\steps}[1]{^{\parentheses{#1}}}
+\newcommand{\next}[1]{{#1}^+}
+\newcommand{\prev}[1]{{#1}^-}
+
+%------------%
+% Derivation %
+%------------%
+\newcommand{\total}{\mathrm{d}}
+\newcommand{\totalderiv}[2]{\frac{\total #1}{\total #2}}
+\newcommand{\partialderiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\liesym}{\mathcal{L}}
+\newcommand{\liederiv}[2]{\liesym_{#1} #2}
+\newcommand{\liebrack}[2]{\brackets{#1, #2}}
+
+%----------------%
+% Measure theory %
+%----------------%
+\newcommand{\card}{\singlebars}
+\newcommand{\meas}[2][]{\singlebars{#2}_{#1}}
+\newcommand{\Gdelta}{G_{\delta}}
+\newcommand{\Fsigma}{F_{\sigma}}
+
+%-------%
+% Looks %
+%-------%
+\newcommand{\interval}{\intervalus}
+\newcommand{\range}{\rangefr}
+\newcommand{\complem}{\complemc}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\im}{\imagsym}
+\newcommand{\ex}{\expsym}
+
+%---------------%
+% Abbreviations %
+%---------------%
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\ie}{i.e.\@\xspace}
+\newcommand{\eg}{e.g.\@\xspace}
+\newcommand{\comma}{\text{, }}
+
+% The only uppercase letter not available are \H, \L, \O, \P, and \S
+
+%------%
+% Time %
+%------%
+\newcommand{\tm}{^}
+\newcommand{\T}{\tm{t}}
+\newcommand{\Tm}{\tm{t-1}}
+\newcommand{\Tp}{\tm{t+1}}
+
+%--------%
+% Agents %
+%--------%
+\newcommand{\ag}{_}
+\newcommand{\I}{\ag{i}}
+\newcommand{\mI}{\ag{-i}}
+\newcommand{\one}{\ag{1}}
+\newcommand{\two}{\ag{2}}
+
+%----------------------%
+% Calligraphic letters %
+%----------------------%
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+%--------------------%
+% Blackboard letters %
+%--------------------%
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bI}{\mathbb{I}}
+\newcommand{\bJ}{\mathbb{J}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bO}{\mathbb{O}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bU}{\mathbb{U}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bW}{\mathbb{W}}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bY}{\mathbb{Y}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+%-----------------%
+% Fraktur letters %
+%-----------------%
+\newcommand{\fA}{\mathfrak{A}}
+\newcommand{\fB}{\mathfrak{B}}
+\newcommand{\fC}{\mathfrak{C}}
+\newcommand{\fD}{\mathfrak{D}}
+\newcommand{\fE}{\mathfrak{E}}
+\newcommand{\fF}{\mathfrak{F}}
+\newcommand{\fG}{\mathfrak{G}}
+\newcommand{\fH}{\mathfrak{H}}
+\newcommand{\fI}{\mathfrak{I}}
+\newcommand{\fJ}{\mathfrak{J}}
+\newcommand{\fK}{\mathfrak{K}}
+\newcommand{\fL}{\mathfrak{L}}
+\newcommand{\fM}{\mathfrak{M}}
+\newcommand{\fN}{\mathfrak{N}}
+\newcommand{\fO}{\mathfrak{O}}
+\newcommand{\fP}{\mathfrak{P}}
+\newcommand{\fQ}{\mathfrak{Q}}
+\newcommand{\fR}{\mathfrak{R}}
+\newcommand{\fS}{\mathfrak{S}}
+\newcommand{\fT}{\mathfrak{T}}
+\newcommand{\fU}{\mathfrak{U}}
+\newcommand{\fV}{\mathfrak{V}}
+\newcommand{\fW}{\mathfrak{W}}
+\newcommand{\fX}{\mathfrak{X}}
+\newcommand{\fY}{\mathfrak{Y}}
+\newcommand{\fZ}{\mathfrak{Z}}
