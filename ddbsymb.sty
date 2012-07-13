@@ -4,7 +4,6 @@
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{ifthen}
-\RequirePackage{etex}      % \middle
 \RequirePackage{stmaryrd}  % \llbracket
 \RequirePackage{xspace}    % \xspace
 
@@ -27,38 +26,40 @@
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclarePairedDelimiter\ceiling{\lceiling}{\rceiling}
 
-\newcommand{\of}{\parentheses}
-\newcommand{\element}{\brackets}
-\newcommand{\ofproba}{\brackets}
+\newcommand{\of}{\parentheses*}
+\newcommand{\element}{\brackets*}
+\newcommand{\middlebar}{\, \delimsize\vert \,}
 
-\newcommand{\middlebar}{\, \middle\vert \,}
+\newcommand{\groupparen}{\parentheses*}
+\newcommand{\groupbrack}{\brackets*}
+\newcommand{\groupbrace}{\braces*}
 
 %---------%
 % Numbers %
 %---------%
-\DeclarePairedDelimiter\brathesesdel{\lbrack}{\rparen}
-\DeclarePairedDelimiter\parencketsdel{\lparen}{\rbrack}
-\DeclarePairedDelimiter\lbracketsdel{\lbrack}{\lbrack}
-\DeclarePairedDelimiter\rbracketsdel{\rbrack}{\rbrack}
+\DeclarePairedDelimiter\bratheses{\lbrack}{\rparen}
+\DeclarePairedDelimiter\parenckets{\lparen}{\rbrack}
+\DeclarePairedDelimiter\lbrackets{\lbrack}{\lbrack}
+\DeclarePairedDelimiter\rbrackets{\rbrack}{\rbrack}
 
 \newcommand{\intervalus}[3][cc]{
-  \ifthenelse{\equal{#1}{cc}}{\brackets{#2 , #3}}{}
-  \ifthenelse{\equal{#1}{oo}}{\parentheses{#2 , #3}}{}
-  \ifthenelse{\equal{#1}{co}}{\brathesesdel*{#2 , #3}}{}
-  \ifthenelse{\equal{#1}{oc}}{\parencketsdel*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{cc}}{\brackets*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oo}}{\parentheses*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{co}}{\bratheses*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oc}}{\parenckets*{#2 , #3}}{}
 }
 \newcommand{\intervalfr}[3][cc]{
-  \ifthenelse{\equal{#1}{cc}}{\brackets{#2 , #3}}{}
-  \ifthenelse{\equal{#1}{oo}}{\invertbrackets{#2 , #3}}{}
-  \ifthenelse{\equal{#1}{co}}{\lbracketsdel*{#2 , #3}}{}
-  \ifthenelse{\equal{#1}{oc}}{\rbracketsdel*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{cc}}{\brackets*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oo}}{\invertbrackets*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{co}}{\lbrackets*{#2 , #3}}{}
+  \ifthenelse{\equal{#1}{oc}}{\rbrackets*{#2 , #3}}{}
 }
-\newcommand{\rangeus}[2]{\braces{#1 \, .. \, #2}}
-\newcommand{\rangefr}[2]{\bbrackets{#1 , #2}}
-\newcommand{\abs}{\singlebars}
-\newcommand{\pospart}[1]{\brackets{#1}^+}
-\newcommand{\negpart}[1]{\brackets{#1}^-}
-\newcommand{\onem}[1]{\parentheses{1 - #1}}
+\newcommand{\rangeus}[2]{\braces*{#1 \, .. \, #2}}
+\newcommand{\rangefr}[2]{\bbrackets*{#1 , #2}}
+\newcommand{\abs}{\singlebars*}
+\newcommand{\pospart}[1]{\groupbrack{#1}^+}
+\newcommand{\negpart}[1]{\groupbrack{#1}^-}
+\newcommand{\onem}[1]{\groupparen{1 - #1}}
 
 \newcommand{\imagsym}{\mathrm{\mathbf{i}}}
 \newcommand{\expsym}{\mathrm{e}}
@@ -73,10 +74,10 @@
 % Sets %
 %------%
 \newcommand{\set}{\braces*}
-\newcommand{\suchthat}{\middlebar}
+\DeclarePairedDelimiterX\setsuchthat[2]{\lbrace}{\rbrace}{#1 \middlebar #2}
 
-\newcommand{\complemC}[1]{\complement#1}
-\newcommand{\complemc}[1]{#1^{c}}
+\newcommand{\complemC}[1]{\complement{#1}}
+\newcommand{\complemc}[1]{{#1}^{c}}
 \newcommand{\complembar}[1]{\overline{#1}}
 
 \newcommand{\union}{\cup}
@@ -100,17 +101,17 @@
 %---------------%
 % Vector spaces %
 %---------------%
-\newcommand{\tuple}{\parentheses}
-\newcommand{\norm}[2][]{\doublebars{#2}_{#1}}
+\newcommand{\tuple}{\parentheses*}
+\newcommand{\norm}[2][]{\doublebars*{#2}_{#1}}
 \newcommand{\transposesym}{\mathrm{T}}
-\newcommand{\tr}[1]{{#1}^{\transposesym}}
+\newcommand{\tr}{^{\transposesym}}
 
 %-----------%
 % Sequences %
 %-----------%
-\newcommand{\idx}[1]{_{#1}}
-\newcommand{\idxin}[2]{_{#1 \in #2}}
-\newcommand{\idxfromto}[3]{_{#1 = #2}^{#3}}
+\newcommand{\idx}{_}
+\newcommand{\idxin}[2]{\idx{#1 \in #2}}
+\newcommand{\idxfromto}[3]{\idx{#1 = #2}^{#3}}
 
 \newcommand{\seqelem}[3]{{#1}#2{#3}}
 \newcommand{\seqin}[4]{\set{\seqelem{#1}{#2}{#3}}\idxover{#3}{#4}}
@@ -134,28 +135,24 @@
 \newcommand{\expectsym}{\mathbb{E}}
 \newcommand{\varsym}{\mathbb{V}\textrm{ar}}
 
-% the starred version of \ofproba is used to allow for a conditional which is implemented through \middle
+\newcommand{\ofp}{\brackets*}
+\DeclarePairedDelimiterX\condproba[2]{\lbrack}{\rbrack}{#1 \middlebar #2}
+\newcommand{\condp}{\condproba*}
+
 \newcommand{\underdist}{_}
-\newcommand{\ofp}{\ofproba*}
-\newcommand{\probaof}[2][]{\probasym \underdist{#1} \ofp{#2}}
-\newcommand{\expectof}[2][]{\expectsym \underdist{#1} \ofp{#2}}
-\newcommand{\varof}[2][]{\varsym \underdist{#1} \ofp{#2}}
+
+\newcommand{\probaof}[1][]{\probasym \underdist{#1} \ofp}
+\newcommand{\expectof}[1][]{\expectsym \underdist{#1} \ofp}
+\newcommand{\varof}[1][]{\varsym \underdist{#1} \ofp}
+
+\newcommand{\probacond}[1][]{\probasym \underdist{#1} \condp}
+\newcommand{\expectcond}[1][]{\expectsym \underdist{#1} \condp}
+\newcommand{\varcond}[1][]{\varsym \underdist{#1} \condp}
 
 \newcommand{\distribsym}{\Delta}
-\newcommand{\distribover}[1]{\distribsym\of{#1}}
-
-\newcommand{\cond}{\middlebar}
+\newcommand{\distribover}{\distribsym\of}
 
 \newcommand{\drawn}{\sim}
-
-%---------------%
-% Markov chains %
-%---------------%
-\newcommand{\access}{\rightarrow}
-\newcommand{\communicate}{\leftrightarrow}
-\newcommand{\steps}[1]{^{\parentheses{#1}}}
-\newcommand{\nxt}[1]{{#1}^+}
-\newcommand{\prv}[1]{{#1}^-}
 
 %------------%
 % Derivation %
@@ -165,15 +162,47 @@
 \newcommand{\partialderiv}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\liesym}{\mathcal{L}}
 \newcommand{\liederiv}[2]{\liesym_{#1} #2}
-\newcommand{\liebrack}[2]{\brackets{#1, #2}}
+\newcommand{\liebrack}[2]{\brackets*{#1, #2}}
 
 %----------------%
 % Measure theory %
 %----------------%
-\newcommand{\card}{\singlebars}
-\newcommand{\meas}[2][]{\singlebars{#2}_{#1}}
+\newcommand{\card}{\singlebars*}
+\newcommand{\meas}[2][]{\singlebars*{#2}_{#1}}
 \newcommand{\Gdelta}{G_{\delta}}
 \newcommand{\Fsigma}{F_{\sigma}}
+
+
+%------%
+% Time %
+%------%
+\newcommand{\tm}{^}
+\newcommand{\T}{\tm{t}}
+\newcommand{\Tm}{\tm{t-1}}
+\newcommand{\Tp}{\tm{t+1}}
+
+%--------%
+% Agents %
+%--------%
+\newcommand{\ag}{_}
+\newcommand{\I}{\ag{i}}
+\newcommand{\mI}{\ag{-i}}
+\newcommand{\one}{\ag{1}}
+\newcommand{\two}{\ag{2}}
+
+%---------------%
+% Markov chains %
+%---------------%
+\newcommand{\access}{\rightarrow}
+\newcommand{\communicate}{\leftrightarrow}
+\newcommand{\steps}[1]{\tm{\parentheses{#1}}}
+\newcommand{\nxt}{\tm{+}}
+\newcommand{\prv}{\tm{-}}
+
+%-------------%
+% Game theory %
+%-------------%
+\newcommand{\br}{\text{BR}}
 
 %-------%
 % Looks %
@@ -195,28 +224,6 @@
 \newcommand{\comma}{\text{, }}
 
 % The only uppercase letter not available are \H, \L, \O, \P, and \S
-
-%------%
-% Time %
-%------%
-\newcommand{\tm}{^}
-\newcommand{\T}{\tm{t}}
-\newcommand{\Tm}{\tm{t-1}}
-\newcommand{\Tp}{\tm{t+1}}
-
-%--------%
-% Agents %
-%--------%
-\newcommand{\ag}{_}
-\newcommand{\I}{\ag{i}}
-\newcommand{\mI}{\ag{-i}}
-\newcommand{\one}{\ag{1}}
-\newcommand{\two}{\ag{2}}
-
-%-------------%
-% Game theory %
-%-------------%
-\newcommand{\br}{\text{BR}}
 
 %----------------------%
 % Calligraphic letters %
