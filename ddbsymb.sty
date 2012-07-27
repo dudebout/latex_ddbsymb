@@ -75,7 +75,9 @@
 % Sets %
 %------%
 \newcommand{\set}{\braces*}
-\DeclarePairedDelimiterX\setsuchthat[2]{\lbrace}{\rbrace}{#1 \middlebar #2}
+\newcommand{\suchthatbar}{\middlebar}
+\newcommand{\suchthatcolon}{:}
+\DeclarePairedDelimiterX\setsuchthat[2]{\lbrace}{\rbrace}{\,#1 \suchthat #2\,}
 
 \newcommand{\complemC}[1]{\complement{#1}}
 \newcommand{\complemc}[1]{{#1}^{c}}
@@ -221,6 +223,7 @@
 \newcommand{\im}{\imagsym}
 \newcommand{\ex}{\expsym}
 \newcommand{\total}{\totalroman}
+\newcommand{\suchthat}{\suchthatbar}
 
 %---------------%
 % Abbreviations %
