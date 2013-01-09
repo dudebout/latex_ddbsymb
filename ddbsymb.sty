@@ -7,6 +7,10 @@
 \RequirePackage{stmaryrd}  % \llbracket
 \RequirePackage{xspace}    % \xspace
 
+% Uppercase letters not available for commands:
+% - in plain LaTeX: \H, \L, \O, \P, and \S
+% - in XeLaTeX, the same plus: \B, \C, \G, \M, \T, and \U
+
 %-----------%
 % Operators %
 %-----------%
@@ -22,7 +26,7 @@
 \DeclarePairedDelimiter\braces{\lbrace}{\rbrace}
 \DeclarePairedDelimiter\brackets{\lbrack}{\rbrack}
 \DeclarePairedDelimiter\invertbrackets{\rbrack}{\lbrack}
-\DeclarePairedDelimiter\bbrackets{\llbracket}{\rbracket}
+\DeclarePairedDelimiter\bbrackets{\llbracket}{\rrbracket}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclarePairedDelimiter\ceiling{\lceiling}{\rceiling}
 
@@ -186,7 +190,7 @@
 % Time %
 %------%
 \newcommand{\tm}{^}
-\newcommand{\T}{\tm{t}}
+\newcommand{\Tt}{\tm{t}}
 \newcommand{\Tm}{\tm{t-1}}
 \newcommand{\Tp}{\tm{t+1}}
 
@@ -194,7 +198,7 @@
 % Agents %
 %--------%
 \newcommand{\ag}{_}
-\newcommand{\I}{\ag{i}}
+\newcommand{\Ii}{\ag{i}}
 \newcommand{\mI}{\ag{-i}}
 \newcommand{\one}{\ag{1}}
 \newcommand{\two}{\ag{2}}
@@ -255,9 +259,7 @@
 \newcommand{\etc}{etc.\@\xspace}
 \newcommand{\ie}{i.e.\@\xspace}
 \newcommand{\eg}{e.g.\@\xspace}
-\newcommand{\comma}{\text{, }}
-
-% The only uppercase letter not available are \H, \L, \O, \P, and \S
+\newcommand{\comma}{\textnormal{, }}
 
 %---------------%
 % Roman letters %
