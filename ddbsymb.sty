@@ -137,14 +137,18 @@
 \newcommand{\seqin}[4]{\tuple{\seqelem{#1}{#2}{#3}}\idxin{#3}{#4}}
 \newcommand{\seqfromto}[5]{\tuple{\seqelem{#1}{#2}{#3}}\idxfromto{#3}{#4}{#5}}
 % comma separated
-\newcommand{\seqcom}[4]{\seqelem{#1}{#2}{#3}, \dotsc, #1#2{#4}}
+\newcommand{\seqcom}[4]{\seqelem{#1}{#2}{#3}, \ldots, #1#2{#4}}
 % juxtaposed
-\newcommand{\seqjuxt}[4]{\seqelem{#1}{#2}{#3} \dotsm #1#2{#4}}
+\newcommand{\seqjuxt}[4]{\seqelem{#1}{#2}{#3} \cdots #1#2{#4}}
+% generic
+\newcommand{\seqgen}[5]{\seqelem{#2}{#3}{#4} #1 \cdots #1 #2#3{#5}}
 % the doubling of one of the letters indicates that two elements are used to start or finish the sequence
 \newcommand{\sseqcom}[5]{\seqelem{#1}{#2}{#3}, \seqcom{#1}{#2}{#4}{#5}}
 \newcommand{\sseqjuxt}[5]{\seqelem{#1}{#2}{#3} \seqjuxt{#1}{#2}{#4}{#5}}
+\newcommand{\sseqgen}[6]{\seqelem{#2}{#3}{#4} #1 \seqgen{#1}{#2}{#3}{#5}{#6}}
 \newcommand{\seqqcom}[5]{\seqcom{#1}{#2}{#3}{#4}, \seqelem{#1}{#2}{#5}}
 \newcommand{\seqqjuxt}[5]{\seqcom{#1}{#2}{#3}{#4} \seqelem{#1}{#2}{#5}}
+\newcommand{\seqqgen}[6]{\seqgen{#1}{#2}{#3}{#4}{#5} \seqelem{#2}{#3}{#6}}
 
 \newcommand{\intseq}[2]{#1, \dotsc, #2}
 
@@ -216,8 +220,13 @@
 \newcommand{\mI}{\ag{-i}}
 \newcommand{\one}{\ag{1}}
 \newcommand{\two}{\ag{2}}
-\newcommand{\agstuple}[1]{\tuple{\sseqcom{#1}{\ag}{1}{2}{\card{\cI}}}}
+\newcommand{\agstuple}[1]{\seqin{#1}{\ag}{i}{\cI}}
+\newcommand{\agstuplecom}[1]{\tuple{\sseqcom{#1}{\ag}{1}{2}{\card{\cI}}}}
+\newcommand{\agsset}[1]{\prod\idxin{i}{\cI}#1\Ii}
+\newcommand{\agssettim}[1]{\sseqgen{\times}{#1}{\ag}{1}{2}{\card{\cI}}}
 \newcommand{\agstupledef}[1]{#1 = \tuple{\sseqcom{#1}{\ag}{1}{2}{\card{\cI}}}}
+
+
 
 %---------------%
 % Markov chains %
