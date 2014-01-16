@@ -107,6 +107,8 @@
 \newcommand{\Inter}{\bigcap}
 \newcommand{\Directsum}{\bigoplus}
 
+\newcommand{\powset}[1]{2\pow{#1}}
+
 %----------%
 % Topology %
 %----------%
@@ -224,6 +226,8 @@
 \newcommand{\agstuplecom}[1]{\tuple{\sseqcom{#1}{\ag}{1}{2}{\card{\cI}}}}
 \newcommand{\agsset}[1]{\prod\idxin{i}{\cI}#1\Ii}
 \newcommand{\agssettim}[1]{\sseqgen{\times}{#1}{\ag}{1}{2}{\card{\cI}}}
+\newcommand{\agsdistset}[1]{\prod\idxin{i}{\cI} \distribover{#1\Ii}}
+\newcommand{\agsdistsettim}[1]{\distribover{#1\one} \times \distribover{#1\two} \times \cdots \times \distribover{#1\ag{\card{\cI}}}}
 \newcommand{\agstupledef}[1]{#1 = \tuple{\sseqcom{#1}{\ag}{1}{2}{\card{\cI}}}}
 
 
