@@ -238,7 +238,7 @@
 \newcommand{\opstuple}[1]{\seqin{#1}{\ag}{j}{-i}}
 \newcommand{\opstuplecom}[1]{\tuple{\sseqcom{#1}{\ag}{1}{2}{i-1}, \seqcom{#1}{\ag}{i+1}{\card{\cI}}}}
 \newcommand{\opsset}[1]{\prod\idxin{j}{-i}#1\Ij}
-\newcommand{\opssettim}[1]{\tuple{\sseqcom{#1}{\ag}{1}{2}{i-1}, \seqcom{#1}{\ag}{i+1}{\card{\cI}}}}
+\newcommand{\opssettim}[1]{\sseqtim{#1}{\ag}{1}{2}{i-1} \times \seqtim{#1}{\ag}{i+1}{\card{\cI}}}
 \newcommand{\opsdistset}[1]{\prod\idxin{j}{-i} \distribover{#1\Ij}}
 \newcommand{\opsdistsettim}[1]{\distribover{#1\one} \times \distribover{#1\two} \times \cdots \times \distribover{#1\ag{i-1}} \times \distribover{#1\ag{i+1}} \times \cdots \times \distribover{#1\ag{\card{\cI}}}}
 
